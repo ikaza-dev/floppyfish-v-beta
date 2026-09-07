@@ -3,6 +3,8 @@ on: push
 jobs:
   unzip:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - run: unzip -o floppyfish-v-beta-fixed.zip && rm floppyfish-v-beta-fixed.zip
@@ -10,5 +12,5 @@ jobs:
           git config user.name "fixbot"
           git config user.email "fix@fix.com"
           git add .
-          git commit -m "unzip fix"
-          git push
+          git commit -m "unzip fix" || echo "Nothing to commit"
+          git push || echo "Nothing to push"
